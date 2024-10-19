@@ -195,30 +195,13 @@ onMounted(() => {
     <base-card title="List of Districts">
         <template #action>
             <div class="tw-space-x-4">
-                <q-btn
-                    outline
-                    no-caps
-                    unelevated
-                    color="info"
-                    @click="openDialog()"
-                >
-                    <base-icon
-                        icon-name="AddSquare"
-                        size="16"
-                        class="tw-mr-3"
-                    />
+                <q-btn outline no-caps unelevated color="info" @click="openDialog()">
+                    <base-icon icon-name="AddSquare" size="16" class="tw-mr-3" />
                     Create New
                 </q-btn>
             </div>
 
-            <q-input
-                filled
-                v-model="searchKeyword"
-                type="text"
-                label="Search"
-                color="secondary"
-                dense
-            >
+            <q-input filled v-model="searchKeyword" type="text" label="Search" color="secondary" dense>
                 <template #prepend>
                     <base-icon icon-name="SearchStatus" class="tw-mr-2" />
                 </template>
@@ -226,11 +209,7 @@ onMounted(() => {
         </template>
 
         <template #content>
-            <base-table
-                :columns="tableColumns"
-                :rows="filteredTableRows"
-                row-key="name"
-            >
+            <base-table :columns="tableColumns" :rows="filteredTableRows" row-key="name">
                 <template #name="props">
                     <q-td>
                         <div class="tw-underline tw-cursor-pointer">
@@ -244,10 +223,7 @@ onMounted(() => {
                         <div class="tw-w-48 tw-text-wrap !tw-truncate">
                             {{ props.row.address }}
 
-                            <q-tooltip
-                                v-if="props.row.address.length >= 40"
-                                class="!tw-w-56"
-                            >
+                            <q-tooltip v-if="props.row.address.length >= 40" class="!tw-w-56">
                                 {{ props.row.address }}
                             </q-tooltip>
                         </div>
@@ -259,38 +235,18 @@ onMounted(() => {
                         <q-btn flat no-caps unelevated color="secondary">
                             <base-icon icon-name="More" size="16" />
 
-                            <q-menu
-                                anchor="bottom end"
-                                self="top end"
-                                class="tw-shadow-lg tw-shadow-gray-50"
-                            >
+                            <q-menu anchor="bottom end" self="top end" class="tw-shadow-lg tw-shadow-gray-50">
                                 <q-list style="min-width: 100px">
-                                    <q-item
-                                        clickable
-                                        @click="openDialog(props.row)"
-                                    >
-                                        <q-item-section
-                                            class="tw-flex-row tw-gap-3 tw-items-center tw-justify-start"
-                                        >
-                                            <base-icon
-                                                icon-name="Edit"
-                                                class="text-warning"
-                                            />
+                                    <q-item clickable @click="openDialog(props.row)">
+                                        <q-item-section class="tw-flex-row tw-gap-3 tw-items-center tw-justify-start">
+                                            <base-icon icon-name="Edit" class="text-warning" />
                                             <span>Edit</span>
                                         </q-item-section>
                                     </q-item>
                                     <q-separator />
-                                    <q-item
-                                        clickable
-                                        @click="openDeleteDialog(props.row.id)"
-                                    >
-                                        <q-item-section
-                                            class="tw-flex-row tw-gap-3 tw-items-center tw-justify-start"
-                                        >
-                                            <base-icon
-                                                icon-name="Trash"
-                                                class="text-negative"
-                                            />
+                                    <q-item clickable @click="openDeleteDialog(props.row.id)">
+                                        <q-item-section class="tw-flex-row tw-gap-3 tw-items-center tw-justify-start">
+                                            <base-icon icon-name="Trash" class="text-negative" />
 
                                             <span>Delete</span>
                                         </q-item-section>
@@ -317,15 +273,11 @@ onMounted(() => {
 
                 <q-card-actions align="right">
                     <q-btn flat label="Cancel" color="negative" v-close-popup />
-                    <q-btn flat label="Submit" color="info" v-close-popup />
+                    <q-btn flat type="submit" label="Submit" color="info" v-close-popup />
                 </q-card-actions>
             </q-form>
         </q-card>
     </q-dialog>
 
-    <base-confirmation-dialog
-        v-model="confirmDialog"
-        action="delete"
-        @onAction="handleAction"
-    />
+    <base-confirmation-dialog v-model="confirmDialog" action="delete" @onAction="handleAction" />
 </template>
